@@ -136,29 +136,29 @@ if st.button("Predict"):
 
     if((prediction_dt[0] == 1)&(prediction_knn[0] == 1)&(prediction_nb[0] == 1)):
         accuracy1=(accuracy_dt+accuracy_nb)/2
-        st.write(f"Patients are predicted to have heart disease with accuraccy {accuracy1:.2f}")
+        st.write(f"Patients are predicted to have heart disease == [ Positive ] , accuraccy {accuracy1:.2f}")
     elif((prediction_dt[0] == 1)&(prediction_nb[0] == 1)):
         accuracy2=(accuracy_dt+accuracy_nb)/2
-        st.write(f"Patients are predicted to have heart disease with accuraccy {accuracy2:.2f}")
+        st.write(f"Patients are predicted to have heart disease == [ Positive ] , accuraccy {accuracy2:.2f}")
     elif((prediction_dt[0] == 1)&(prediction_knn[0] == 1)):
         accuracy3=(accuracy_dt+accuracy_knn)/2
-        st.write(f"Patients are predicted to have heart disease with accuraccy {accuracy3:.2f}")
+        st.write(f"Patients are predicted to have heart disease == [ Positive ] , accuraccy {accuracy3:.2f}")
     elif((prediction_nb[0] == 1)&(prediction_knn[0] == 1)):
         accuracy4=(accuracy_dt+accuracy_knn)/2
-        st.write(f"Patients are predicted to have heart disease with accuraccy {accuracy4:.2f}")
+        st.write(f"Patients are predicted to have heart disease == [ Positive ] , accuraccy {accuracy4:.2f}")
 
     if((prediction_dt[0] == 0)&(prediction_knn[0] == 0)&(prediction_nb[0] == 0)):
         accuracy1_=(accuracy_dt+accuracy_nb)/2
-        st.write(f"Patients aren't predicted to have heart disease, accuraccy {accuracy1_:.2f}")
+        st.write(f"Patients aren't predicted to have heart disease == [ Negative ] , accuraccy {accuracy1_:.2f}")
     elif((prediction_dt[0] == 0)&(prediction_nb[0] == 0)):
         accuracy2_=(accuracy_dt+accuracy_nb)/2
-        st.write(f"Patients aren't predicted to have heart disease, accuraccy {accuracy2_:.2f}")
+        st.write(f"Patients aren't predicted to have heart disease == [ Negative ] ,accuraccy {accuracy2_:.2f}")
     elif((prediction_dt[0] == 0)&(prediction_knn[0] == 0)):
         accuracy3_=(accuracy_dt+accuracy_knn)/2
-        st.write(f"Patients aren't predicted to have heart disease, accuraccy {accuracy3_:.2f}")
+        st.write(f"Patients aren't predicted to have heart disease == [ Negative ] ,accuraccy {accuracy3_:.2f}")
     elif((prediction_nb[0] == 0)&(prediction_knn[0] == 0)):
         accuracy4_=(accuracy_dt+accuracy_knn)/2
-        st.write(f"Patients aren't predicted to have heart disease, accuraccy {accuracy4_:.2f}")
+        st.write(f"Patients aren't predicted to have heart disease == [ Negative ] ,accuraccy {accuracy4_:.2f}")
 
     
 
