@@ -113,8 +113,7 @@ if st.button("Predict"):
     else:
         st.sidebar.write(f"Patients aren't predicted to have heart disease. == [ Negative ]")
 
-    # Evaluate models
-    st.sidebar.subheader("Model Evaluation:")
+   
     
     # Decision Tree
     y_dt_pred = DecisionTree.predict(X_dt)
