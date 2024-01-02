@@ -47,7 +47,7 @@ DecisionTree = DecisionTreeClassifier(ccp_alpha=0.0, class_weight=None, criterio
 DecisionTree.fit(X_dt, y_dt)
 
 # KNN model
-best_n_neighbors = 5  # Assume 5 as the best value based on previous code
+best_n_neighbors = 13
 best_knn = KNeighborsClassifier(n_neighbors=best_n_neighbors)
 best_knn.fit(X_dt, y_dt)
 
