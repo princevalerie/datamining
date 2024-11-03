@@ -45,17 +45,6 @@ DecisionTree.fit(x_data_normalized, y_target)
 # Streamlit App
 st.title("Heart Attack Prediction App - Decision Tree")
 
-# Display cross-validation accuracy
-st.subheader("Decision Tree Cross-Validation Accuracy")
-st.write(f"Average CV Accuracy: {np.mean(cv_scores_dt):.2f}")
-st.write(f"Standard Deviation: {np.std(cv_scores_dt):.2f}")
-
-# Plot and display the Decision Tree
-st.subheader("Decision Tree Visualization")
-fig, ax = plt.subplots(figsize=(12, 8))
-plot_tree(DecisionTree, filled=True, feature_names=columns_to_normalize, class_names=["No Heart Disease", "Heart Disease"], ax=ax)
-st.pyplot(fig)
-
 # Input features for prediction
 st.header("Enter Input Values:")
 
@@ -84,3 +73,15 @@ if st.button("Predict"):
         st.write("Patient is predicted to have heart disease. == [ Positive ]")
     else:
         st.write("Patient isn't predicted to have heart disease. == [ Negative ]")
+
+# Display cross-validation accuracy and Decision Tree visualization below the Prediction Result
+st.subheader("Decision Tree Model Performance and Visualization")
+
+# Display cross-validation accuracy
+st.write(f"Cross-Validation Accuracy: {np.mean(cv_scores_dt):.2f}")
+st.write(f"Standard Deviation of CV Accuracy: {np.std(cv_scores_dt):.2f}")
+
+# Plot and display the Decision Tree
+fig, ax = plt.subplots(figsize=(12, 8))
+plot_tree(DecisionTree, filled=True, feature_names=columns_to_normalize, class_names=["No Heart Disease", "Heart Disease"], ax=ax)
+st.pyplot(fig)
