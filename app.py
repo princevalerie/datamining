@@ -5,7 +5,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold, cross_val_score
 
 # Load dataset
@@ -46,8 +45,16 @@ DecisionTree.fit(x_data_normalized, y_target)
 # Streamlit App
 st.title("Heart Attack Prediction App - Decision Tree")
 
-# Sidebar for prediction options
-st.sidebar.header("Options")
+# Display cross-validation accuracy
+st.subheader("Decision Tree Cross-Validation Accuracy")
+st.write(f"Average CV Accuracy: {np.mean(cv_scores_dt):.2f}")
+st.write(f"Standard Deviation: {np.std(cv_scores_dt):.2f}")
+
+# Plot and display the Decision Tree
+st.subheader("Decision Tree Visualization")
+fig, ax = plt.subplots(figsize=(12, 8))
+plot_tree(DecisionTree, filled=True, feature_names=columns_to_normalize, class_names=["No Heart Disease", "Heart Disease"], ax=ax)
+st.pyplot(fig)
 
 # Input features for prediction
 st.header("Enter Input Values:")
@@ -72,19 +79,8 @@ if st.button("Predict"):
     prediction_dt = DecisionTree.predict(input_df)
 
     # Display prediction
-    st.sidebar.subheader("Decision Tree Prediction:")
+    st.subheader("Prediction Result:")
     if prediction_dt[0] == 1:
-        st.sidebar.write("Patient is predicted to have heart disease. == [ Positive ]")
+        st.write("Patient is predicted to have heart disease. == [ Positive ]")
     else:
-        st.sidebar.write("Patient isn't predicted to have heart disease. == [ Negative ]")
-
-    # Display cross-validation results
-    st.sidebar.subheader("Decision Tree Cross-Validation Accuracy:")
-    st.sidebar.write(f"Average CV Accuracy: {np.mean(cv_scores_dt):.2f}")
-    st.sidebar.write(f"Standard Deviation: {np.std(cv_scores_dt):.2f}")
-
-    # Plot and display the Decision Tree
-    st.subheader("Decision Tree Visualization")
-    fig, ax = plt.subplots(figsize=(12, 8))
-    plot_tree(DecisionTree, filled=True, feature_names=columns_to_normalize, class_names=["No Heart Disease", "Heart Disease"], ax=ax)
-    st.pyplot(fig)
+        st.write("Patient isn't predicted to have heart disease. == [ Negative ]")
