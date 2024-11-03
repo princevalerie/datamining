@@ -36,7 +36,7 @@ x_data_normalized = scaler.fit_transform(x_data)
 x_data_normalized = pd.DataFrame(x_data_normalized, columns=columns_to_normalize)
 
 # Decision Tree model
-DecisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=4)
+DecisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=2)
 kf = KFold(n_splits=10, shuffle=True, random_state=1)  # Using 10-fold cross-validation
 cv_scores_dt = cross_val_score(DecisionTree, x_data_normalized, y_target, cv=kf, scoring='accuracy')
 
