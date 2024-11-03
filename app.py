@@ -2,8 +2,9 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold, cross_val_score
 
@@ -35,9 +36,12 @@ x_data_normalized = scaler.fit_transform(x_data)
 x_data_normalized = pd.DataFrame(x_data_normalized, columns=columns_to_normalize)
 
 # Decision Tree model
-DecisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=3)
+DecisionTree = DecisionTreeClassifier(criterion='entropy', max_depth=4)
 kf = KFold(n_splits=10, shuffle=True, random_state=1)  # Using 10-fold cross-validation
 cv_scores_dt = cross_val_score(DecisionTree, x_data_normalized, y_target, cv=kf, scoring='accuracy')
+
+# Train Decision Tree for visualization
+DecisionTree.fit(x_data_normalized, y_target)
 
 # Streamlit App
 st.title("Heart Attack Prediction App - Decision Tree")
@@ -64,8 +68,7 @@ if st.button("Predict"):
     input_values_normalized = scaler.transform(input_values)
     input_df = pd.DataFrame(input_values_normalized, columns=columns_to_normalize)
     
-    # Fit and predict with Decision Tree
-    DecisionTree.fit(x_data_normalized, y_target)
+    # Predict with Decision Tree
     prediction_dt = DecisionTree.predict(input_df)
 
     # Display prediction
@@ -79,3 +82,9 @@ if st.button("Predict"):
     st.sidebar.subheader("Decision Tree Cross-Validation Accuracy:")
     st.sidebar.write(f"Average CV Accuracy: {np.mean(cv_scores_dt):.2f}")
     st.sidebar.write(f"Standard Deviation: {np.std(cv_scores_dt):.2f}")
+
+    # Plot and display the Decision Tree
+    st.subheader("Decision Tree Visualization")
+    fig, ax = plt.subplots(figsize=(12, 8))
+    plot_tree(DecisionTree, filled=True, feature_names=columns_to_normalize, class_names=["No Heart Disease", "Heart Disease"], ax=ax)
+    st.pyplot(fig)
